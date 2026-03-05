@@ -13,9 +13,10 @@
             <h1 id="saudacao-usuario">Olá!</h1>
             <p id="data-atual"></p>
         </div>
-        <div class="acessibilidade">
+        <div class="acessibilidade" style="display: flex; align-items: center; gap: 10px;">
             <button class="btn-fonte" onclick="mudarFonte(10)">A+</button>
             <button class="btn-fonte" onclick="mudarFonte(-10)">A-</button>
+            <button onclick="fazerLogout()" style="background: none; border: none; color: #EF5350; cursor: pointer; font-weight: bold; font-size: 16px;">Sair</button>
         </div>
     </header>
 
@@ -447,7 +448,10 @@
             visorSaldoHist.innerText = `R$ ${saldoMesHist.toFixed(2).replace('.', ',')}`;
             visorSaldoHist.style.color = saldoMesHist < 0 ? '#EF5350' : (saldoMesHist > 0 ? '#4CAF50' : '#AAA');
         }
-
+        function fazerLogout() {
+            localStorage.removeItem('financeiro_nome_usuario');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>
