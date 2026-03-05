@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tostão - Seus tostões sob controle.</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <div class="info-usuario">
+            <h1 id="saudacao-usuario">Olá!</h1>
+            <p id="data-atual"></p>
+        </div>
+        <div class="acessibilidade">
+            <button class="btn-fonte" onclick="mudarFonte(10)">A+</button>
+            <button class="btn-fonte" onclick="mudarFonte(-10)">A-</button>
+        </div>
+    </header>
+
+    <div class="container-principal">
+        
+        <aside class="planilha-lateral">
+            <h2>📋 Planilha de Despesas</h2>
+            
+            <div class="inputs-despesa">
+                <input type="text" id="input-desc-despesa" class="campo-entrada" placeholder="Nome (Ex: Conta de Água)">
+                <input type="number" id="input-valor-despesa" class="campo-entrada" placeholder="Valor (R$)">
+                <button type="button" class="btn-salvar" onclick="adicionarDespesa()">Adicionar</button>
+            </div>
+
+            <ul id="lista-despesas-detalhada" class="lista-despesas-detalhada"></ul>
+        </aside>
+
+        <main class="painel">
+            <section class="card salario">
+                <h2>Salário Base</h2>
+                <div class="card-flex">
+                    <input type="number" id="input-salario" class="campo-entrada-invisivel" placeholder="R$ 0,00" oninput="calcularSaldo()">
+                    <div class="icone-card">
+                        <svg width="35" height="35" viewBox="0 0 24 24" fill="#00897B"><path d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z"/></svg>
+                    </div>
+                </div>
+                <div class="linha-decorativa"></div>
+            </section>
+
+            <section class="card despesas">
+                <h2>Despesas do Mês</h2>
+                <div class="card-flex">
+                    <p id="visor-despesas" class="valor-negativo" style="font-size: 1.8rem; font-weight: bold; margin: 0;">R$ 0,00</p>
+                    <div class="icone-card">
+                        <svg width="35" height="35" viewBox="0 0 24 24" fill="#00897B"><path d="M3,22L4.5,20.5L6,22L7.5,20.5L9,22L10.5,20.5L12,22L13.5,20.5L15,22L16.5,20.5L18,22L19.5,20.5L21,22V2L19.5,3.5L18,2L16.5,3.5L15,2L13.5,3.5L12,2L10.5,3.5L9,2L7.5,3.5L6,2L4.5,3.5L3,2M18,9H6V7H18M18,13H6V11H18M18,17H6V15H18Z"/></svg>
+                    </div>
+                </div>
+                <div class="linha-decorativa"></div>
+            </section>
+
+            <section class="card saldo">
+                <h2>Saldo Restante</h2>
+                <div class="card-flex">
+                    <p id="valor-saldo" style="font-size: 1.8rem; font-weight: bold; margin: 0;">R$ 0,00</p>
+                    <div class="icone-card">
+                        <svg width="35" height="35" viewBox="0 0 24 24" fill="#00897B"><path d="M21,18V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V6H12C10.89,6 10,6.9 10,8V16A2,2 0 0,0 12,18M12,16H22V8H12M16,13.5A1.5,1.5 0 0,1 14.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,12A1.5,1.5 0 0,1 16,13.5Z"/></svg>
+                    </div>
+                </div>
+                <div class="linha-decorativa"></div>
+                <p id="mensagem-saldo" class="mensagem" style="margin-top: 10px;">Aguardando valores...</p>
+            </section>
+
+            <section class="card poupanca">
+                <h2>Dinheiro Guardado</h2>
+                <div class="card-flex">
+                    <p id="visor-poupanca-topo" style="font-size: 1.8rem; font-weight: bold; color: #E0E0E0; margin: 0;">R$ 0,00</p>
+                    <div class="icone-card">
+                        <svg width="35" height="35" viewBox="0 0 24 24" fill="#00897B"><path d="M17.83,12A3,3 0 0,0 18,11.5C18,9.57 16.43,8 14.5,8C13.25,8 12.15,8.65 11.53,9.66C11.35,9.66 11.18,9.66 11,9.66C9.9,9.66 8.86,9.88 7.9,10.27C7.5,10.45 7.12,10.66 6.76,10.9C5.7,11.5 5,12.7 5,14V14.5C5,15.88 6.12,17 7.5,17H8V18.5C8,19.33 8.67,20 9.5,20H10.5C11.33,20 12,19.33 12,18.5V17H13V18.5C13,19.33 13.67,20 14.5,20H15.5C16.33,20 17,19.33 17,18.5V17H17.5C18.88,17 20,15.88 20,14.5V14C20,12.7 19.3,11.5 18.24,10.9C18.06,11.23 17.93,11.6 17.83,12M15.5,13A1,1 0 0,1 14.5,12A1,1 0 0,1 15.5,11A1,1 0 0,1 16.5,12A1,1 0 0,1 15.5,13Z"/></svg>
+                    </div>
+                </div>
+                <div class="linha-decorativa"></div>
+                
+                <div class="inputs-poupanca" style="margin-top: 20px;">
+                    <input type="text" id="input-banco" class="campo-entrada" placeholder="Banco (ex: Inter)">
+                    <input type="number" id="input-valor-poupanca" class="campo-entrada" placeholder="Valor (R$)">
+                    <button type="button" class="btn-salvar" onclick="adicionarPoupanca()">Guardar</button>
+                </div>
+
+                <div class="historico-poupanca">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3 style="margin: 0; font-size: 16px;">Extrato do Cofrinho</h3>
+                        <button type="button" onclick="limparHistorico()" style="background: none; border: none; color: #EF5350; cursor: pointer; text-decoration: underline; font-size: 0.8rem;">Limpar</button>
+                    </div>
+                    <ul id="lista-poupanca"></ul>
+                    <p class="total-poupanca" style="margin-top: 10px; font-weight: bold;">Total no Cofrinho: <span id="total-guardado">R$ 0,00</span></p>
+                </div>
+            </section>
+
+            <section class="card historico-mensal">
+                <h2>📅 Histórico de Movimentações</h2>
+                <div class="cabecalho-historico">
+                    <div class="saldo-discreto">Saldo do Mês: <strong id="saldo-historico-visor">R$ 0,00</strong></div>
+                    <input type="month" class="filtro-mes" id="input-filtro-mes" onchange="carregarHistoricoMes()">
+                </div>
+
+                <div class="container-colunas">
+                    <div class="coluna">
+                        <h3 class="titulo-entradas">Entradas</h3>
+                        <ul class="lista-valores" id="lista-entradas-historico"></ul>
+                    </div>
+
+                    <div class="coluna">
+                        <h3 class="titulo-saidas">Saídas</h3>
+                        <ul class="lista-valores" id="lista-saidas-historico"></ul>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-retirada" onclick="fazerRetirada()">Retirar do Cofrinho (Emergência)</button>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        let totalPoupancaGeral = 0;
+        let poupancaDaSessao = 0;   
+        let historicoPoupanca = [];
+        let listaDespesas = [];
+        let totalDespesas = 0;
+
+        window.onload = function() {
+            carregarNomeUsuario();
+            atualizarData();
+            carregarDados();
+        };
+
+        function carregarNomeUsuario() {
+            const nomeSalvo = localStorage.getItem('financeiro_nome_usuario');
+            if (nomeSalvo) {
+                document.getElementById('saudacao-usuario').innerText = `Olá, ${nomeSalvo}`;
+            } else {
+                document.getElementById('saudacao-usuario').innerText = `Olá, Visitante`;
+            }
+        }
+
+        function atualizarData() {
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            const data = new Date();
+            document.getElementById('data-atual').innerText = `${meses[data.getMonth()]} de ${data.getFullYear()}`;
+        }
+
+        let tamanhoBase = 100;
+        function mudarFonte(mudanca) {
+            tamanhoBase += mudanca;
+            if (tamanhoBase > 150) tamanhoBase = 150; 
+            if (tamanhoBase < 80) tamanhoBase = 80;   
+            document.documentElement.style.fontSize = tamanhoBase + '%';
+        }
+
+        function carregarDados() {
+            const data = new Date();
+            const mesRealInputFormat = `${data.getFullYear()}-${String(data.getMonth() + 1).padStart(2, '0')}`;
+            const mesReal = `${data.getMonth()}-${data.getFullYear()}`;
+            const mesSalvo = localStorage.getItem('financeiro_mes_referencia');
+
+            document.getElementById('input-filtro-mes').value = mesRealInputFormat;
+
+            const salarioSalvo = localStorage.getItem('financeiro_salario_atual');
+            if (salarioSalvo) {
+                document.getElementById('input-salario').value = salarioSalvo;
+            }
+
+            if (mesSalvo && mesSalvo !== mesReal) {
+                let dbHistorico = JSON.parse(localStorage.getItem('financeiro_db_historico') || '{}');
+                let despesasMesAnterior = JSON.parse(localStorage.getItem('financeiro_despesas_lista') || '[]');
+                let salarioMesAnterior = Number(localStorage.getItem('financeiro_salario_atual') || 0);
+                
+                let partesMesSalvo = mesSalvo.split('-');
+                let chaveFiltro = `${partesMesSalvo[1]}-${String(Number(partesMesSalvo[0]) + 1).padStart(2, '0')}`;
+
+                dbHistorico[chaveFiltro] = {
+                    salario: salarioMesAnterior,
+                    despesas: despesasMesAnterior
+                };
+                localStorage.setItem('financeiro_db_historico', JSON.stringify(dbHistorico));
+
+                listaDespesas = [];
+                localStorage.setItem('financeiro_mes_referencia', mesReal);
+                localStorage.setItem('financeiro_despesas_lista', JSON.stringify(listaDespesas));
+                document.getElementById('input-salario').value = '';
+                localStorage.setItem('financeiro_salario_atual', '');
+            } else {
+                if (!mesSalvo) {
+                    localStorage.setItem('financeiro_mes_referencia', mesReal);
+                }
+                try {
+                    const despesasSalvas = localStorage.getItem('financeiro_despesas_lista');
+                    if (despesasSalvas) listaDespesas = JSON.parse(despesasSalvas);
+                } catch (e) {
+                    listaDespesas = [];
+                }
+            }
+
+            try {
+                const salvo = localStorage.getItem('financeiro_historico');
+                if (salvo) historicoPoupanca = JSON.parse(salvo);
+            } catch (e) {
+                historicoPoupanca = [];
+            }
+            
+            renderizarDespesas();
+            renderizarPoupanca(); 
+            carregarHistoricoMes();
+        }
+
+        function adicionarDespesa() {
+            const desc = document.getElementById('input-desc-despesa').value;
+            const valorInput = document.getElementById('input-valor-despesa').value.replace(',', '.');
+            const valor = Number(valorInput);
+
+            if (desc.trim() === '' || valor <= 0 || isNaN(valor)) {
+                alert('Por favor, preencha o nome da despesa e um valor válido.');
+                return;
+            }
+
+            listaDespesas.push({ descricao: desc, valor: valor });
+            localStorage.setItem('financeiro_despesas_lista', JSON.stringify(listaDespesas));
+
+            document.getElementById('input-desc-despesa').value = '';
+            document.getElementById('input-valor-despesa').value = '';
+
+            renderizarDespesas();
+            carregarHistoricoMes(); 
+        }
+
+        function removerDespesa(index) {
+            listaDespesas.splice(index, 1);
+            localStorage.setItem('financeiro_despesas_lista', JSON.stringify(listaDespesas));
+            renderizarDespesas();
+            carregarHistoricoMes();
+        }
+
+        function renderizarDespesas() {
+            const ul = document.getElementById('lista-despesas-detalhada');
+            ul.innerHTML = '';
+            totalDespesas = 0;
+
+            listaDespesas.forEach((item, index) => {
+                totalDespesas += item.valor;
+                const li = document.createElement('li');
+                li.className = 'item-despesa';
+                
+                li.innerHTML = `
+                    <span style="flex: 1; text-align: left; word-break: break-all;">${item.descricao}</span>
+                    <strong class="valor-negativo" style="margin: 0 15px;">R$ ${item.valor.toFixed(2).replace('.', ',')}</strong>
+                    <button type="button" class="btn-excluir" onclick="removerDespesa(${index})">X</button>
+                `;
+                ul.appendChild(li);
+            });
+
+            document.getElementById('visor-despesas').innerText = `R$ ${totalDespesas.toFixed(2).replace('.', ',')}`;
+            calcularSaldo();
+        }
+
+        function calcularSaldo() {
+            const salarioInput = document.getElementById('input-salario').value;
+            localStorage.setItem('financeiro_salario_atual', salarioInput);
+            
+            const salario = Number(salarioInput) || 0; 
+            const saldo = salario - totalDespesas - poupancaDaSessao;
+            let porcentagem = 0;
+            
+            if (salario > 0) {
+                porcentagem = (saldo / salario) * 100;
+            }
+            
+            const elementoSaldo = document.getElementById('valor-saldo');
+            const elementoMensagem = document.getElementById('mensagem-saldo');
+            
+            elementoSaldo.innerText = `R$ ${saldo.toFixed(2).replace('.', ',')}`;
+            
+            elementoSaldo.style.color = '#E0E0E0';
+            elementoMensagem.style.color = '#AAA';
+
+            if (salario === 0) {
+                elementoMensagem.innerText = 'Aguardando valores...';
+                elementoSaldo.style.color = '#FFB300'; 
+                elementoSaldo.innerText = 'R$ 0,00'; 
+            } else if (saldo < 0) {
+                elementoSaldo.style.color = '#EF5350';
+                elementoMensagem.style.color = '#EF5350';
+                elementoMensagem.innerText = 'Alerta: Saldo negativo!';
+            } else if (porcentagem > 20) {
+                elementoSaldo.style.color = '#4CAF50';
+                elementoMensagem.style.color = '#4CAF50';
+                elementoMensagem.innerText = 'Suas finanças estão ok!';
+            } else if (porcentagem >= 10 && porcentagem <= 20) {
+                elementoSaldo.style.color = '#FFB300';
+                elementoMensagem.style.color = '#FFB300';
+                elementoMensagem.innerText = 'Atenção: Margem apertada.';
+            } else {
+                elementoSaldo.style.color = '#EF5350';
+                elementoMensagem.style.color = '#EF5350';
+                elementoMensagem.innerText = 'Cuidado: Risco financeiro!';
+            }
+
+            carregarHistoricoMes(); 
+        }
+
+        function limparHistorico() {
+            historicoPoupanca = [];
+            poupancaDaSessao = 0;
+            localStorage.removeItem('financeiro_historico');
+            renderizarPoupanca();
+        }
+
+        function renderizarPoupanca() {
+            const lista = document.getElementById('lista-poupanca');
+            lista.innerHTML = '';
+            totalPoupancaGeral = 0;
+            poupancaDaSessao = 0;
+
+            const data = new Date();
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            const mesAnoAtual = `${meses[data.getMonth()]} ${data.getFullYear()}`;
+
+            historicoPoupanca.forEach((item) => {
+                totalPoupancaGeral += item.valor;
+                
+                if (item.mesAno === mesAnoAtual) {
+                    poupancaDaSessao += item.valor;
+                }
+
+                const li = document.createElement('li');
+                let valorFormatado = Math.abs(item.valor).toFixed(2).replace('.', ',');
+                let classeCor = item.valor < 0 ? 'valor-negativo' : 'valor-positivo';
+                let sinal = item.valor < 0 ? '-' : '+';
+
+                li.innerHTML = `<span>${item.mesAno} - ${item.banco}</span> <strong class="${classeCor}">${sinal} R$ ${valorFormatado}</strong>`;
+                lista.appendChild(li);
+            });
+
+            document.getElementById('total-guardado').innerText = `R$ ${totalPoupancaGeral.toFixed(2).replace('.', ',')}`;
+            document.getElementById('visor-poupanca-topo').innerText = `R$ ${totalPoupancaGeral.toFixed(2).replace('.', ',')}`;
+            calcularSaldo();
+        }
+
+        function adicionarPoupanca() {
+            const banco = document.getElementById('input-banco').value;
+            const valorInput = document.getElementById('input-valor-poupanca').value.replace(',', '.');
+            const valor = Number(valorInput);
+
+            if (banco === '' || valor <= 0 || isNaN(valor)) {
+                alert('Por favor, preencha o nome do banco e um valor válido.');
+                return;
+            }
+
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            const data = new Date();
+            const mesAno = `${meses[data.getMonth()]} ${data.getFullYear()}`;
+
+            historicoPoupanca.push({ banco: banco, valor: valor, mesAno: mesAno });
+            localStorage.setItem('financeiro_historico', JSON.stringify(historicoPoupanca));
+
+            document.getElementById('input-banco').value = '';
+            document.getElementById('input-valor-poupanca').value = '';
+
+            renderizarPoupanca();
+        }
+
+        function fazerRetirada() {
+            let valorInput = prompt("Digite o valor da retirada (ex: 50,00):");
+            
+            if (valorInput === null || valorInput.trim() === "") {
+                return; 
+            }
+
+            let valorRetirada = parseFloat(valorInput.replace(',', '.'));
+
+            if (isNaN(valorRetirada) || valorRetirada <= 0) {
+                alert("Por favor, insira um valor válido.");
+                return;
+            }
+
+            if (valorRetirada > totalPoupancaGeral) {
+                alert("Saldo insuficiente no cofrinho!");
+                return;
+            }
+
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+            const data = new Date();
+            const mesAno = `${meses[data.getMonth()]} ${data.getFullYear()}`;
+
+            historicoPoupanca.push({ banco: 'Retirada (Emergência)', valor: -valorRetirada, mesAno: mesAno });
+            localStorage.setItem('financeiro_historico', JSON.stringify(historicoPoupanca));
+
+            renderizarPoupanca();
+        }
+
+        function carregarHistoricoMes() {
+            const mesFiltro = document.getElementById('input-filtro-mes').value;
+            if (!mesFiltro) return;
+
+            let dbHistorico = JSON.parse(localStorage.getItem('financeiro_db_historico') || '{}');
+            let listaEntradas = document.getElementById('lista-entradas-historico');
+            let listaSaidas = document.getElementById('lista-saidas-historico');
+            let visorSaldoHist = document.getElementById('saldo-historico-visor');
+
+            listaEntradas.innerHTML = '';
+            listaSaidas.innerHTML = '';
+
+            const dataAtual = new Date();
+            const mesAtualFormatado = `${dataAtual.getFullYear()}-${String(dataAtual.getMonth() + 1).padStart(2, '0')}`;
+
+            let dadosDoMes = null;
+
+            if (mesFiltro === mesAtualFormatado) {
+                dadosDoMes = {
+                    salario: Number(document.getElementById('input-salario').value) || 0,
+                    despesas: listaDespesas
+                };
+            } else {
+                dadosDoMes = dbHistorico[mesFiltro] || { salario: 0, despesas: [] };
+            }
+
+            if (dadosDoMes.salario > 0) {
+                listaEntradas.innerHTML = `<li><span>Salário Base</span> <span class="valor-positivo">R$ ${dadosDoMes.salario.toFixed(2).replace('.', ',')}</span></li>`;
+            } else {
+                listaEntradas.innerHTML = `<li><span style="color: #666;">Nenhuma entrada base</span></li>`;
+            }
+
+            let totalSaidasHist = 0;
+            if (dadosDoMes.despesas && dadosDoMes.despesas.length > 0) {
+                dadosDoMes.despesas.forEach(d => {
+                    totalSaidasHist += d.valor;
+                    listaSaidas.innerHTML += `<li><span>${d.descricao}</span> <span class="valor-negativo">R$ ${d.valor.toFixed(2).replace('.', ',')}</span></li>`;
+                });
+            } else {
+                listaSaidas.innerHTML = `<li><span style="color: #666;">Sem saídas registradas</span></li>`;
+            }
+
+            let saldoMesHist = dadosDoMes.salario - totalSaidasHist;
+            visorSaldoHist.innerText = `R$ ${saldoMesHist.toFixed(2).replace('.', ',')}`;
+            visorSaldoHist.style.color = saldoMesHist < 0 ? '#EF5350' : (saldoMesHist > 0 ? '#4CAF50' : '#AAA');
+        }
+
+    </script>
+</body>
+</html>

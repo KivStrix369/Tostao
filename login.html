@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tostão - Seus tostões sob controle.</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #121212; 
+            margin: 0; 
+            color: #E0E0E0; 
+        }
+        .login-container { 
+            background: #1E1E1E; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5); 
+            border: 1px solid #333; 
+            width: 100%; 
+            max-width: 350px; 
+            text-align: center; 
+        }
+        .campo-entrada { 
+            width: 100%; 
+            padding: 10px; 
+            margin: 10px 0; 
+            border: 1px solid #444; 
+            border-radius: 5px; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+            background-color: #2C2C2C; 
+            color: #E0E0E0; 
+        }
+        .campo-entrada::placeholder { color: #888; }
+        .btn-entrar { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #00897B; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 15px; 
+            transition: background 0.3s; 
+        }
+        .btn-entrar:hover { background-color: #00695C; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2 style="color: #00897B; font-size: 2.2rem; margin-top: 0; margin-bottom: 5px;">Tostão</h2>
+        <p style="color: #E0E0E0; font-weight: bold; margin-bottom: 20px;">Seus tostões sob controle.</p>
+        <p style="color: #AAA; margin-bottom: 20px;">Informe seu nome para acessar.</p>
+        <input type="text" id="nome-usuario" class="campo-entrada" placeholder="Como quer ser chamado?">
+        <button class="btn-entrar" onclick="fazerLogin()">Entrar</button>
+    </div>
+
+    <script>
+        function fazerLogin() {
+            const nome = document.getElementById('nome-usuario').value;
+            if (nome.trim() === '') {
+                alert('Por favor, digite seu nome.');
+                return;
+            }
+            // Salva o nome na memória do navegador
+            localStorage.setItem('financeiro_nome_usuario', nome);
+            // Redireciona para a página principal
+            window.location.href = 'index.html'; 
+        }
+    </script>
+</body>
+</html>

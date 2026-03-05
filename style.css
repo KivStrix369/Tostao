@@ -1,0 +1,353 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.cabecalho {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.info-usuario h1 {
+    font-size: 1.5rem;
+    color: #E0E0E0;
+}
+
+.info-usuario p {
+    color: #AAA;
+    font-size: 0.9rem;
+}
+
+.acessibilidade .btn-fonte {
+    background-color: #00897B;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+/* --- Novo Layout em Colunas --- */
+.container-principal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .container-principal {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .planilha-lateral {
+        flex: 1.5;
+        position: sticky;
+        top: 20px;
+    }
+    .painel {
+        flex: 1;
+    }
+}
+
+.planilha-lateral {
+    background-color: #1E1E1E;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.planilha-lateral h2 {
+    font-size: 1.2rem;
+    color: #E0E0E0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.inputs-despesa {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.inputs-despesa .campo-entrada {
+    font-size: 1rem;
+    padding: 8px;
+}
+
+#input-desc-despesa {
+    flex: 2;
+}
+
+#input-valor-despesa {
+    flex: 1;
+}
+
+.lista-despesas-detalhada {
+    list-style: none;
+}
+
+.item-despesa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2C2C2C;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #E0E0E0;
+}
+
+.btn-excluir {
+    background-color: #EF5350;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- ESTRUTURA DOS CARDS TIPO DASHBOARD --- */
+.painel {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card {
+    background-color: #1E1E1E;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-align: left;
+}
+
+.card h2 {
+    font-size: 0.95rem;
+    color: #AAA;
+    margin-bottom: 5px;
+    font-weight: normal;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.card-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icone-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+}
+
+.linha-decorativa {
+    height: 4px;
+    background-color: #00897B;
+    border-radius: 2px;
+    margin-top: 15px;
+    width: 70%; 
+}
+
+.campo-entrada {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #121212;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #E0E0E0;
+    font-weight: normal;
+    outline: none;
+}
+
+.campo-entrada::placeholder {
+    color: #888;
+}
+
+.campo-entrada:focus {
+    border-color: #00897B;
+}
+
+.campo-entrada-invisivel {
+    width: 100%;
+    max-width: 200px;
+    font-size: 1.8rem;
+    background: transparent;
+    border: none;
+    color: #E0E0E0;
+    font-weight: bold;
+    outline: none;
+    padding: 0;
+}
+
+.campo-entrada-invisivel::placeholder {
+    color: #555;
+}
+
+.destaque-verde { color: #4CAF50 !important; }
+.destaque-amarelo { color: #FFB300 !important; }
+.destaque-vermelho { color: #EF5350 !important; }
+
+.mensagem {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #AAA; 
+}
+
+/* --- Módulo de Poupança --- */
+.inputs-poupanca {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.btn-salvar {
+    background-color: #00897B;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.historico-poupanca {
+    text-align: left;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+.historico-poupanca h3 {
+    font-size: 1rem;
+    color: #E0E0E0;
+    margin-bottom: 10px;
+}
+
+#lista-poupanca {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+#lista-poupanca li {
+    background-color: #2C2C2C;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    color: #E0E0E0;
+}
+
+/* --- ESTILOS COMPLEMENTARES (Login e Histórico Mensal) --- */
+.login-container { 
+    background-color: #1E1E1E; 
+    padding: 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
+    width: 100%; 
+    max-width: 350px; 
+    text-align: center; 
+    margin: auto;
+}
+
+.login-container h2 { margin-bottom: 10px; }
+
+.btn-entrar { 
+    width: 100%; 
+    padding: 12px; 
+    background-color: #00897B; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-top: 15px; 
+}
+
+.btn-entrar:hover, .btn-salvar:hover, .acessibilidade .btn-fonte:hover { 
+    background-color: #00695C; 
+}
+
+.cabecalho-historico { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding-bottom: 15px; 
+    margin-bottom: 20px; 
+    border-bottom: 1px solid #333; 
+}
+
+.saldo-discreto { font-size: 15px; color: #AAA; }
+
+.filtro-mes { 
+    padding: 5px; 
+    font-size: 14px; 
+    border-radius: 5px; 
+    background-color: #2C2C2C; 
+    color: #E0E0E0; 
+    border: 1px solid #333; 
+}
+
+.container-colunas { display: flex; gap: 15px; margin-bottom: 20px; }
+
+.coluna { 
+    flex: 1; 
+    background-color: #1E1E1E; 
+    padding: 15px; 
+    border-radius: 8px; 
+    border: 1px solid #333;
+}
+
+.titulo-entradas { color: #4CAF50; text-align: center; font-size: 16px; margin-top: 0; margin-bottom: 15px; }
+.titulo-saidas { color: #EF5350; text-align: center; font-size: 16px; margin-top: 0; margin-bottom: 15px; }
+.lista-valores { list-style: none; padding: 0; margin: 0; }
+.lista-valores li { display: flex; justify-content: space-between; font-size: 14px; padding: 8px 0; border-bottom: 1px solid #333; }
+.lista-valores li:last-child { border-bottom: none; }
+
+.btn-retirada { 
+    width: 100%; 
+    padding: 15px; 
+    background-color: #00897B; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-top: 5px; 
+}
+
+.btn-retirada:hover { background-color: #00695C; }
+.valor-negativo { color: #EF5350 !important; }
+.valor-positivo { color: #4CAF50 !important; }
