@@ -120,6 +120,12 @@
     </div>
 
     <script>
+        // Trava de segurança: se não tiver nome salvo, manda pro login
+        if (!localStorage.getItem('financeiro_nome_usuario')) {
+            window.location.href = 'login.html';
+        }
+
+        // --- Variáveis Globais ---
         let totalPoupancaGeral = 0;
         let poupancaDaSessao = 0;   
         let historicoPoupanca = [];
